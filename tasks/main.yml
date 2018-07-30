@@ -1,0 +1,25 @@
+---
+- name: Fetch GPG key
+  fetch:
+    dest: "{{ global_cache_dir }}/aptly.asc"
+    src: "{{ aptly_client_key_source }}"
+    flat: true
+  delegate_to: "{{ aptly_client_aptly_host }}"
+  run_once: true
+
+- name: Copy GPG key to known location
+  copy:
+    src: "{{ global_cache_dir }}/aptly.asc"
+    dest: "{{ aptly_client_key_destination }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install GPG key
+  apt_key:
+    file: "{{ aptly_client_key_destination }}"
+
+- name: Install repository
+  apt_repository:
+    repo: "{{ aptly_client_repo }}"
+    filename: aptly
