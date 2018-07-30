@@ -1,0 +1,2 @@
+---
+aptly_client_key_location: /var/lib/aptly/aptly.asc

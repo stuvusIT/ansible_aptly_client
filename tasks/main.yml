@@ -1,0 +1,24 @@
+---
+- name: Fetch GPG key
+  fetch:
+    dest: "{{ global_cache_dir }}/aptly.asc"
+    src: "{{ aptly_client_key_location }}"
+    flat: true
+  delegate_to: "{{ aptly_client_aptly_host }}"
+  run_once: true
+
+- name: Slurp GPG key
+  slurp:
+    src: "{{ global_cache_dir }}/aptly.asc"
+  register: gpgkey
+  delegate_to: localhost
+  become: no
+
+- name: Install GPG key
+  apt_key:
+    data: "{{ gpgkey['content'] | b64decode }}"
+
+- name: Install repository
+  apt_repository:
+    repo: "{{ aptly_client_repo }}"
+    filename: aptly

@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Janne Heß
+  description: Install access to an Aptly repository
+  company: stuvus (https://stuvus.uni-stuttgart.de)
+
+  license: CC-BY-SA
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+
+  galaxy_tags:
+    - aptly
+    - apt
+    - repository
+
+dependencies: []
