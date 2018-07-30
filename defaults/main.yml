@@ -1,2 +1,3 @@
 ---
-aptly_client_key_location: /var/lib/aptly/aptly.asc
+aptly_client_key_source: /var/lib/aptly/aptly.asc
+aptly_client_key_destination: /usr/share/aptly.asc
